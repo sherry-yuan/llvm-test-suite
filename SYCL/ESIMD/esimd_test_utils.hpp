@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <sycl/sycl.hpp>
+#include <CL/sycl.hpp>
 
 #define NOMINMAX
 
