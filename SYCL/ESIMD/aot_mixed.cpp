@@ -5,18 +5,12 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
 //===----------------------------------------------------------------------===//
-// This test passes with 21.49.21786 driver, and fails with older versions.
-// REQUIRES: gpu, TEMPORARILY_DISABLED
+// REQUIRES: gpu
 // UNSUPPORTED: cuda || hip
 // RUN: %clangxx -fsycl -fsycl-targets=spir64_gen -Xsycl-target-backend=spir64_gen "-device gen9" -o %t.sycl.out -DENABLE_SYCL=0 %s
 // RUN: %GPU_RUN_PLACEHOLDER %t.sycl.out
 // RUN: %clangxx -fsycl -fsycl-targets=spir64_gen -Xsycl-target-backend=spir64_gen "-device gen9" -o %t.out %s
 // RUN: %GPU_RUN_PLACEHOLDER %t.out
-// XFAIL: *
-// TODO: remove XFAIL once ocloc support for automatic scalar/vector SPIRV
-// module dispatching is available in public drivers. Also change '-device gen9'
-// (safe variant to reliably get unexpected PASS when ocloc is fixed) to
-// %gpu_aot_target_opts aka '-device *' (which stresses ocloc).
 
 // This test checks ESIMD ahead-of-time compilation scenarios:
 // 1) When the application contains both SYCL and ESIMD kernel, thus requiring
