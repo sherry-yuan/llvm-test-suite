@@ -190,7 +190,10 @@ template <access::address_space space> void or_test_all() {
 
   constexpr int N = 32;
 #ifdef ATOMIC64
-  if (!q.get_device().has(aspect::atomic64)) {
+  if (q.get_device().get_platform().get_backend() == backend::ext_oneapi_hip ||
+      !q.get_device().has(aspect::atomic64)) {
+    // Also temporarily skip the test if backend = HIP because
+    // device.has(aspect::atomic64) is not implemented on it
     std::cout << "Skipping test\n";
     return;
   }
