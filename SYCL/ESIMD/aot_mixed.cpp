@@ -12,7 +12,7 @@
 // RUN: %clangxx -fsycl -fsycl-targets=spir64_gen -Xsycl-target-backend=spir64_gen "-device gen9" -o %t.out %s
 // RUN: %GPU_RUN_PLACEHOLDER %t.out
 
-// This test checks ESIMD ahead-of-time compilation scenarios:
+// This test checks the following ESIMD ahead-of-time compilation scenarios:
 // 1) When the application contains both SYCL and ESIMD kernel, thus requiring
 //    different GPU back-ends (scalar and vector) to kick-in at compile-time.
 // 2) When the application contains only ESIMD kernel.
