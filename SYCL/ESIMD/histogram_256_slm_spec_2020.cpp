@@ -10,7 +10,7 @@
 
 #include <CL/sycl.hpp>
 #include <iostream>
-#include <sycl/ext/intel/experimental/esimd.hpp>
+#include <sycl/ext/intel/esimd.hpp>
 
 static constexpr int NUM_BINS = 256;
 static constexpr int SLM_SIZE = (NUM_BINS * 4);
@@ -18,8 +18,8 @@ static constexpr int BLOCK_WIDTH = 32;
 static constexpr int NUM_BLOCKS = 32;
 
 using namespace cl::sycl;
-using namespace sycl::ext::intel::experimental;
-using namespace sycl::ext::intel::experimental::esimd;
+using namespace sycl::ext::intel;
+using namespace sycl::ext::intel::esimd;
 
 constexpr specialization_id<unsigned int> NumBlocksSpecId(NUM_BLOCKS);
 
@@ -105,7 +105,7 @@ class histogram_slm;
 
 int main(int argc, char **argv) {
   queue q(esimd_test::ESIMDSelector{}, esimd_test::createExceptionHandler(),
-          property::queue::enable_profiling{});
+          sycl::property::queue::enable_profiling{});
   auto dev = q.get_device();
   auto ctxt = q.get_context();
 
